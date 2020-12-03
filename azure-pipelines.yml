@@ -20,8 +20,12 @@ steps:
 
 - task: Ansible@0
   inputs:
-    ansibleInterface: 'agentMachine'
-    playbookPathOnAgentMachine: '$(System.DefaultWorkingDirectory)/users.yml'
-    inventoriesAgentMachine: 'file'
-    inventoryFileOnAgentMachine: 'azure_rm.yml'
+    ansibleInterface: 'remoteMachine'
+    connectionOverSsh: 'SSH - Ansible VM'
+    playbookSourceRemoteMachine: 'agentMachine'
+    playbookRootRemoteMachine: '$(System.DefaultWorkingDirectory)'
+    playbookPathLinkedArtifactOnRemoteMachine: 'users.yml'
+    inventoriesRemoteMachine: 'file'
+    inventoryFileSourceRemoteMachine: 'agentMachine'
+    inventoryFileLinkedArtifactOnRemoteMachine: 'azure_rm.yml'
     args: '--private-key ~/.ssh/ansible_rsa'
